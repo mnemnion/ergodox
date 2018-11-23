@@ -1,7 +1,7 @@
 # mnemnion erogdox ez glow firmare
 
 
-This is my QMK firmare set, focused around a smooth developer experience for macOS.
+This is my QMK firmware set, focused around a smooth developer experience for macOS.
 
 
 ## Features
