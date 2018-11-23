@@ -45,7 +45,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      LT(1,KC_GRAVE), KC_QUOTE, KC_LGUI, KC_LEFT, KC_RIGHT,
 
     // left thumb
-    	KC_LALT, KC_LCTRL,
+    	KC_LCTRL, KC_LALT,
     		KC_HOME,
     	KC_SPACE, KC_TAB, KC_END,
 
@@ -57,7 +57,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      KC_UP, KC_DOWN, KC_LBRACKET, KC_RBRACKET, MO(1),
 
     // right thumb
-    KC_RCTRL, KC_RALT,
+    KC_RALT, KC_RCTRL,
     KC_PGUP,
     KC_PGDOWN, KC_TAB, KC_ENTER
 ),
