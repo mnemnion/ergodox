@@ -45,7 +45,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      LT(1,KC_GRAVE), KC_BSLASH, KC_LGUI, KC_LEFT, KC_RIGHT,
 
     // left thumb
-    	KC_LCTRL, KC_LALT,
+    	KC_LCTRL, LALT_T(KC_ESCAPE),
     		KC_HOME,
     	KC_SPACE, KC_TAB, KC_END,
 
