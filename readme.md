@@ -18,7 +18,3 @@ This is my QMK firmware set, focused around a smooth developer experience for ma
     + Single-press left alt sends escape
 - (Currently) left layer key is a deadkey while I get out of the
   habit of pressing y with my left finger
-- "' and \\| have switched places since I type the former a great
-  deal more than the latter and this puts them in the same place as
-  on a normal keyboard. It's the one baffling decision that ergodox
-  EZ default makes imho
