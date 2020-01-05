@@ -120,6 +120,52 @@ const uint16_t PROGMEM fn_actions[] = {
   [1] = ACTION_LAYER_TAP_TOGGLE(1)
 };
 
+// RGB stuff from tutorial at
+// https://medium.com/the-ergo/how-to-light-up-layers-and-specific-keys-on-ergodox-ez-glow-98bdce67ce9b
+// https://gist.github.com/fdidron/ca9f4a70089ce4f15753fac54be59c44
+
+rgb_config_t rgb_matrix_config;
+
+const uint8_t PROGMEM layercolors[][2] = {
+  [0] = {200,155}
+};
+
+const uint8_t PROGMEM ledcolors[][DRIVER_LED_TOTAL][3] = { [1] = { {0,0,0}, {0,0,0}, {0,0,0},
+{0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {142,123,255}, {142,123,255},
+{142,123,255}, {142,123,255}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0},
+{0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0},
+{0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0},
+{0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0} } };
+
+void matrix_init_user(void) {
+  rgb_matrix_config.raw = eeprom_read_dword(EECONFIG_RGB_MATRIX);
+}
+
+void set_leds_color( int layer) {
+  for (int i = 0; i < DRIVER_LED_TOTAL; i++) {
+    uint8_t val = pgm_read_byte(&ledcolors[layer][i][2]);
+    // if the brightness of the led is set to 0 in the map,
+    // the value is not overriden with global controls, allowing the led
+    // to appear turned off
+    HSV hsv = { .h = pgm_read_byte(&ledcolors[layer][i][0]),
+                .s = pgm_read_byte(&ledcolors[layer][i][1]),
+                .v = val == 0 ? 0 : rgb_matrix_config.val};
+    RGB rgb = hsv_to_rgb( hsv );
+    rgb_matrix_set_color( i, rgb.r, rgb.g, rgb.b );
+  }
+}
+
+void set_layer_color( uint8_t layer ) {
+  HSV hsv = { .h = pgm_read_byte(&layercolors[layer][0]),
+              .s = pgm_read_byte(&layercolors[layer][1]),
+              .v = rgb_matrix_config.val};
+  RGB rgb = hsv_to_rgb( hsv );
+  for (int i = 0; i < DRIVER_LED_TOTAL; i++) {
+    rgb_matrix_set_color( i, rgb.r, rgb.g, rgb.b );
+  }
+}
+
+
 // leaving this in place for compatibilty with old keymaps cloned and re-compiled.
 const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
 {
