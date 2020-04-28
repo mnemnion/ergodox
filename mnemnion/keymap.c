@@ -11,7 +11,7 @@ enum custom_keycodes {
   RGB_SLD,
   SWITCH_WIN,
   BSWITCH_WIN,
-
+  MOOM_ACTIVATE,
 };
 
 
@@ -79,7 +79,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______, KC_F6, KC_F7, KC_F8, KC_F9, KC_F10, KC_F11,
     _______, KC_UP, KC_7, KC_8, KC_9, KC_ASTR, KC_F12,
     KC_DOWN, KC_4, KC_5, KC_6, _______, _______,
-    _______, KC_AMPR, KC_1, KC_2, KC_3, KC_BSLASH, _______,
+    _______, KC_AMPR, KC_1, KC_2, KC_3, KC_BSLASH, MOOM_ACTIVATE,
      _______, KC_DOT, KC_0, KC_EQUAL, _______,
 
     // right thumb
@@ -158,6 +158,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case BSWITCH_WIN:
       if (record -> event.pressed) {
         SEND_STRING(SS_LGUI(SS_LSFT("`")));
+      }
+      return false;
+      break;
+    case MOOM_ACTIVATE:
+      if (record->event.pressed) {
+        SEND_STRING(SS_LCTRL(SS_LGUI("z")));
       }
       return false;
       break;
