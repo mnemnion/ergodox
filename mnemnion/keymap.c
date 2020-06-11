@@ -12,6 +12,8 @@ enum custom_keycodes {
   SWITCH_WIN,
   BSWITCH_WIN,
   MOOM_ACTIVATE,
+  FONT_UP,
+  FONT_DOWN,
 };
 
 
@@ -62,6 +64,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_PGDOWN, KC_TAB, KC_ENTER
 ),
 
+
+// Red LED
 [1] = LAYOUT_ergodox(
     // left hand
     KC_ESCAPE, KC_F1, KC_F2, KC_F3, KC_F4, KC_F5, _______,
@@ -88,9 +92,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______, RGB_HUD, RGB_HUI
 ),
 
+// Green LED
 [2] = LAYOUT_ergodox(
     // left hand
-    _______, _______, _______, _______, _______, _______, _______,
+    _______, _______, _______, _______, _______, _______, FONT_DOWN,
     _______, _______, _______, KC_MS_UP, _______, _______, _______,
     _______, _______, KC_MS_LEFT, KC_MS_DOWN, KC_MS_RIGHT, _______,
     _______, _______, _______, _______, _______, _______, _______,
@@ -102,7 +107,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     	_______, _______, _______,
 
     // right hand
-    _______, _______, _______, _______, _______, _______, _______,
+    FONT_UP, _______, _______, _______, _______, _______, _______,
     _______, _______, _______, _______, _______, _______, _______,
     _______, _______, _______, _______, _______, KC_MEDIA_PLAY_PAUSE,
     _______, _______, _______, KC_MEDIA_PREV_TRACK, KC_MEDIA_NEXT_TRACK, _______, _______,
@@ -165,6 +170,18 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       if (record->event.pressed) {
         SEND_STRING(SS_LCTRL(SS_LGUI("z")));
       }
+      return false;
+      break;
+    case FONT_UP:
+      if (record->event.pressed) {
+        SEND_STRING(SS_LGUI("+"));
+      }
+      return false;
+      break;
+    case FONT_DOWN:
+      if (record->event.pressed) {
+        SEND_STRING(SS_LGUI("-"));
+        }
       return false;
       break;
   }
