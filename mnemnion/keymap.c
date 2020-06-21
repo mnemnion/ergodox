@@ -138,10 +138,18 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
     return MACRO_NONE;
 };
 
+#define SEND(case_enum, string) \
+     case case_enum:\
+     if (record -> event.pressed) {\
+        SEND_STRING(string);\
+     }\
+     return false;\
+     break
+
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
-    // dynamically generate these.
+    // custom cases
     case EPRM:
       if (record->event.pressed) {
         eeconfig_init();
@@ -154,36 +162,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
       return false;
       break;
-    case SWITCH_WIN:
-      if (record -> event.pressed) {
-        SEND_STRING(SS_LGUI("`"));
-      }
-      return false;
-      break;
-    case BSWITCH_WIN:
-      if (record -> event.pressed) {
-        SEND_STRING(SS_LGUI(SS_LSFT("`")));
-      }
-      return false;
-      break;
-    case MOOM_ACTIVATE:
-      if (record->event.pressed) {
-        SEND_STRING(SS_LCTRL(SS_LGUI("z")));
-      }
-      return false;
-      break;
-    case FONT_UP:
-      if (record->event.pressed) {
-        SEND_STRING(SS_LGUI("+"));
-      }
-      return false;
-      break;
-    case FONT_DOWN:
-      if (record->event.pressed) {
-        SEND_STRING(SS_LGUI("-"));
-        }
-      return false;
-      break;
+    // SEND_STRING cases
+    SEND(SWITCH_WIN, SS_LGUI("`"));
+    SEND(BSWITCH_WIN, SS_LGUI(SS_LSFT("`")));
+    SEND(MOOM_ACTIVATE, SS_LCTRL(SS_LGUI("z")));
+    SEND(FONT_UP, SS_LGUI("+"));
+    SEND(FONT_DOWN, SS_LGUI("-"));
   }
   return true;
 }
