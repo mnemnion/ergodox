@@ -14,6 +14,8 @@ enum custom_keycodes {
   MOOM_ACTIVATE,
   FONT_UP,
   FONT_DOWN,
+  TOGGLE_GUTTER,
+  DELETE_WORD,
 };
 
 
@@ -61,7 +63,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     // right thumb
     RALT_T(KC_ESCAPE), KC_RCTRL,
     KC_PGUP,
-    KC_PGDOWN, KC_TAB, KC_ENTER
+    KC_PGDOWN, DELETE_WORD, KC_ENTER
 ),
 
 
@@ -96,7 +98,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [2] = LAYOUT_ergodox(
     // left hand
     _______, _______, _______, _______, _______, _______, FONT_DOWN,
-    _______, _______, _______, KC_MS_UP, _______, _______, _______,
+    _______, _______, _______, KC_MS_UP, _______, TOGGLE_GUTTER, _______,
     _______, _______, KC_MS_LEFT, KC_MS_DOWN, KC_MS_RIGHT, _______,
     _______, _______, _______, _______, _______, _______, _______,
      _______, _______, _______, KC_MS_BTN1, KC_MS_BTN2,
@@ -168,6 +170,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     SEND(MOOM_ACTIVATE, SS_LCTRL(SS_LGUI("z")));
     SEND(FONT_UP, SS_LGUI("+"));
     SEND(FONT_DOWN, SS_LGUI("-"));
+    SEND(TOGGLE_GUTTER, SS_LGUI(SS_LCTRL("t")));
+    SEND(DELETE_WORD, SS_LALT("\x08"));
   }
   return true;
 }
