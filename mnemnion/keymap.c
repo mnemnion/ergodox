@@ -16,6 +16,7 @@ enum custom_keycodes {
   FONT_DOWN,
   TOGGLE_GUTTER,
   DELETE_WORD,
+  SEARCH_REP,
 };
 
 
@@ -98,8 +99,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [2] = LAYOUT_ergodox(
     // left hand
     _______, _______, _______, _______, _______, _______, FONT_DOWN,
-    _______, _______, _______, KC_MS_UP, _______, TOGGLE_GUTTER, _______,
-    _______, _______, KC_MS_LEFT, KC_MS_DOWN, KC_MS_RIGHT, _______,
+    _______, _______, _______, _______, _______, TOGGLE_GUTTER, _______,
+    _______, _______, _______, _______, SEARCH_REP,  _______, //no button
     _______, _______, _______, _______, _______, _______, _______,
      _______, _______, _______, KC_MS_BTN1, KC_MS_BTN2,
 
@@ -172,6 +173,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     SEND(FONT_DOWN, SS_LGUI("-"));
     SEND(TOGGLE_GUTTER, SS_LGUI(SS_LCTRL("t")));
     SEND(DELETE_WORD, SS_LALT("\x08"));
+    SEND(SEARCH_REP, SS_LALT(SS_LGUI("f")));
   }
   return true;
 }
