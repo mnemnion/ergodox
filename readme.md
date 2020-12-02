@@ -7,8 +7,6 @@ This is my QMK firmware set, focused around a smooth developer experience for ma
 ## Features
 
 - Two command keys next to the thumb cluster
-- Two tab keys next to space and return on the thumb cluster
-    + This combination allows app switching with both hands
 - Third command key under the x key
     + This makes it easier to cut, copy, paste, and undo
 - One-shot left shift key, for fluid capitalization
@@ -16,5 +14,4 @@ This is my QMK firmware set, focused around a smooth developer experience for ma
 - Left and right window switch sequences in the upper corners
 - Alt and control on the top of the thumb cluster
     + Single-press left alt sends escape
-- (Currently) left layer key is a deadkey while I get out of the
-  habit of pressing y with my left finger
+- Middle thumb cluster key on the right deletes the preceding word
