@@ -17,6 +17,7 @@ enum custom_keycodes {
   TOGGLE_GUTTER,
   DELETE_WORD,
   SEARCH_REP,
+  RECORD_VID,
 };
 
 
@@ -98,7 +99,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // Green LED
 [2] = LAYOUT_ergodox(
     // left hand
-    _______, _______, _______, _______, _______, _______, FONT_DOWN,
+    _______, _______, _______, _______, RECORD_VID, _______, FONT_DOWN,
     _______, _______, _______, _______, _______, TOGGLE_GUTTER, _______,
     _______, _______, _______, _______, SEARCH_REP,  _______, //no button
     _______, _______, _______, _______, _______, _______, _______,
@@ -149,7 +150,6 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
      return false;\
      break
 
-
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
     // custom cases
@@ -174,6 +174,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     SEND(TOGGLE_GUTTER, SS_LGUI(SS_LCTRL("t")));
     SEND(DELETE_WORD, SS_LALT("\x08"));
     SEND(SEARCH_REP, SS_LALT(SS_LGUI("f")));
+    SEND(RECORD_VID, SS_LGUI(SS_LALT(SS_LCTRL("r"))));
   }
   return true;
 }
